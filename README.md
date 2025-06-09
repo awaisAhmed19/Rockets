@@ -50,12 +50,13 @@
 ### 💻 Build Instructions
 
 ```bash
-git clone https://github.com/yourusername/rocketforge-3d.git
-cd rocketforge-3d
+git clone https://github.com/awaisAhmed/Rockets.git
+cd Rockets
 make
-./rocketforge
-Don’t forget to make clean when you need a fresh rebuild.
+./rocket
 ```
+Don’t forget to make clean when you need a fresh rebuild.
+
 
 
 ### 🧠 Dev Philosophy
