@@ -1,16 +1,18 @@
-JAVAC=javac
-JAVA=java
-JAR=core.jar
-SRC=init.java
-CLASS=init
+CC = g++
+CFLAGS = -Wall -std=c++17
 
-all:compile run
+LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
-compile:
-	$(JAVAC) -cp $(JAR) $(SRC)
+SRC = main.cpp
+OUT = rocket
 
-run:
-	$(JAVA) -cp ".;$(JAR)" $(CLASS)
+all: $(OUT)
+
+$(OUT): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(OUT) $(LIBS)
+
+run: $(OUT)
+	./$(OUT)
 
 clean:
-	del *.class 
+	rm -f $(OUT)
