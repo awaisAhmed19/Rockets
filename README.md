@@ -50,7 +50,7 @@
 ### 💻 Build Instructions
 
 ```bash
-git clone https://github.com/awaisAhmed/Rockets.git
+git clone https://github.com/awaisAhmed19/Rockets.git
 cd Rockets
 make
 ./rocket

@@ -1,18 +1,10 @@
-CC = g++
-CFLAGS = -Wall -std=c++17
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall
+SRC = src
+OBJ = main.cpp rocket.cpp physics.cpp
 
-LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-
-SRC = main.cpp
-OUT = rocket
-
-all: $(OUT)
-
-$(OUT): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(OUT) $(LIBS)
-
-run: $(OUT)
-	./$(OUT)
+all:
+	$(CXX) $(CXXFLAGS) $(addprefix $(SRC)/,$(OBJ)) -o rocket -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 clean:
-	rm -f $(OUT)
+	rm -f rocket
