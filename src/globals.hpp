@@ -17,7 +17,8 @@
 #pragma once
 #define SCREENWIDTH 600
 #define SCREENHEIGHT 600
+const float Pi = 3.14f;
 const float DELTA_T = 0.04f;
-const float GRAVITY = 0.5f;
-
+const float GRAVITY = 0.75f;
+extern void Zoom();
 #endif

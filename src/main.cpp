@@ -14,8 +14,6 @@ int main() {
         R.update();
         BeginDrawing();
         ClearBackground(BLACK);
-        R.draw();
-        // DrawLine(0, SCREENHEIGHT - ROCKET_H, SCREENWIDTH, SCREENHEIGHT - ROCKET_H, DARKGRAY);
         EndDrawing();
     }
     CloseWindow();
