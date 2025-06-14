@@ -1,3 +1,5 @@
+#ifndef ROCKET_HPP
+#define ROCKET_HPP
 #include "globals.hpp"
 #define ROCKET_W 30
 #define ROCKET_H 60
@@ -23,3 +25,4 @@ class Rocket {
     void applyGravity(float g);
     void thrust();
 };
+#endif  // !ROCKET_HPP

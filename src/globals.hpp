@@ -1,5 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+#include <math.h>
+
 #include "raylib.h"
 #ifndef DEBUG
 #define ASSERT(n)
@@ -19,6 +21,6 @@
 #define SCREENHEIGHT 600
 const float Pi = 3.14f;
 const float DELTA_T = 0.04f;
-const float GRAVITY = 0.75f;
+const float GRAVITY = 9.8f;
 extern void Zoom();
 #endif

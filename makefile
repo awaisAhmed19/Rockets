@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 SRC = src
-OBJ = main.cpp rocket.cpp physics.cpp
+OBJ = main.cpp rocket.cpp physics.cpp GameCamera.cpp
 
 all:
 	$(CXX) $(CXXFLAGS) $(addprefix $(SRC)/,$(OBJ)) -o rocket -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
