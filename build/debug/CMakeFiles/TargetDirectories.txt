@@ -1,0 +1,4 @@
+/home/awais/Github/Rockets/build/debug/CMakeFiles/imgui.dir
+/home/awais/Github/Rockets/build/debug/CMakeFiles/rockets.dir
+/home/awais/Github/Rockets/build/debug/CMakeFiles/edit_cache.dir
+/home/awais/Github/Rockets/build/debug/CMakeFiles/rebuild_cache.dir

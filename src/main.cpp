@@ -1,25 +1,57 @@
-#include "GameCamera.hpp"
-#include "globals.hpp"
-#include "rocket.hpp"
+#include "core/core.h"
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_oldnames.h>
+#include <SDL3/SDL_render.h>
+#include <iostream>
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 640;
+
+SDL_Window *window = nullptr;
+SDL_Renderer *renderer = nullptr;
+SDL_Surface *surf = nullptr;
+
+const std::string TITLE = "Rockets";
+
+void CreateWindow() {
+  window = SDL_CreateWindow(TITLE.c_str(), SCREEN_WIDTH, SCREEN_HEIGHT,
+                            SDL_WINDOW_RESIZABLE);
+  if (!window) {
+    std::cerr << "Window did not create! SDL err:" << SDL_GetError()
+              << std::endl;
+    SDL_Quit();
+    return;
+  }
+
+  renderer = SDL_CreateRenderer(window, NULL);
+  if (renderer == nullptr) {
+    std::cerr << "renderer did not create! SDL err:" << SDL_GetError()
+              << std::endl;
+    SDL_Quit();
+    return;
+  }
+}
+
 int main() {
-    InitWindow(SCREENWIDTH, SCREENHEIGHT, "Rockets");
-    SetTargetFPS(60);
-    Rocket R;
-    GameCamera cam(R);
-    R.vel = {0.0f, 0.0f};
-    R.pos = {SCREENWIDTH / 2.0f, SCREENHEIGHT};
-    while (!WindowShouldClose()) {
-        if (IsKeyDown(KEY_SPACE)) {
-            R.thrust();
-        }
-        cam.update(R);
-        BeginDrawing();
-        ClearBackground(BLACK);
-        BeginMode2D(cam.cam);
-        R.update();
-        EndMode2D();
-        EndDrawing();
+  std::cout << "Hello world";
+  bool isRunning = true;
+  SDL_Event e;
+  if (!SDL_Init(SDL_INIT_VIDEO)) {
+    return -1;
+  }
+  CreateWindow();
+  while (isRunning) {
+    while (SDL_PollEvent(&e) != 0) {
+      if (e.type == SDL_EVENT_QUIT) {
+        isRunning = false;
+      }
     }
-    CloseWindow();
-    return 0;
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+  }
+  SDL_DestroySurface(surf);
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
+  return 0;
 }
