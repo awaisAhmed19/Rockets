@@ -155,8 +155,8 @@ struct rect {
   i32 width = 0;
   i32 height = 0;
 
-  rect(math::vector2D &pos, i32 _width, i32 _height) {
-    this->pos = pos;
+  rect(math::vector2D &_pos, i32 _width, i32 _height) {
+    this->pos = _pos;
     this->width = _width;
     this->height = _height;
   }
