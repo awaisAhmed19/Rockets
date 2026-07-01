@@ -1,14 +1,15 @@
 # ninja log v7
-1	6	1782845138552229641	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
+1	6	1782916993312074227	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
 10	6658	1782738229790526998	CMakeFiles/imgui.dir/third_party/imgui/imgui_draw.cpp.o	709f04787161e408
 10	8580	1782738229787478010	CMakeFiles/imgui.dir/third_party/imgui/imgui.cpp.o	83e1be3b10db1d91
 6659	10899	1782738236439309424	CMakeFiles/imgui.dir/third_party/imgui/imgui_tables.cpp.o	d014f28a8bc6780e
 10902	11592	1782738240680646028	CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_sdl3.cpp.o	a3ed144f61de902d
 11592	12042	1782738241370635571	CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_sdlrenderer3.cpp.o	5ce565b7569273c4
-7	1317	1782845138558896217	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
+7	2965	1782898860445124784	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
 8580	14831	1782738238357347919	CMakeFiles/imgui.dir/third_party/imgui/imgui_widgets.cpp.o	e82ea59f654a1141
 14831	15265	1782738244607253205	libimgui.a	74b1ad05dd00eaa5
-1318	1482	1782845139872211730	rockets	ac2a3c4b1cdacf27
-1	7	1782845172901763475	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
-8	1334	1782845172908430052	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
-1334	1495	1782845174238412002	rockets	ac2a3c4b1cdacf27
+2965	3290	1782898863401757881	rockets	ac2a3c4b1cdacf27
+8	894	1782916993322074088	CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o	f8b796c3a13ed165
+1	6	1782917041764737400	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
+7	1167	1782917041768070686	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
+1168	1484	1782917042928054644	rockets	b86ef9375aa92fd9

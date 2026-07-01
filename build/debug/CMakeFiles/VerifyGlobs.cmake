@@ -4,6 +4,7 @@
 # APP_SOURCES at CMakeLists.txt:63 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/awais/Github/Rockets/src/*.cpp")
 set(OLD_GLOB
+  "/home/awais/Github/Rockets/src/Engine/Platform/Window.cpp"
   "/home/awais/Github/Rockets/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

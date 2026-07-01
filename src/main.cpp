@@ -1,4 +1,5 @@
-#include "core/core.h"
+#include "Engine/Platform/Window.h"
+// #include "core/core.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_oldnames.h>
@@ -23,7 +24,7 @@ SDL_Surface *surf = nullptr;
 const std::string TITLE = "Rockets";
 
 void draw() {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
   // to draw;
   SDL_RenderPresent(renderer);
@@ -129,8 +130,8 @@ void stop() {
 
   SDL_Quit();
 }
+
 int main() {
-  std::cout << "Hello world";
-  start();
+  // start();
   return 0;
 }
