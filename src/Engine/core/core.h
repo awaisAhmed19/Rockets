@@ -3,6 +3,7 @@
 #include "Engine/core/Assert.h"
 #include "Engine/core/Logger.h"
 #include <SDL3/SDL_rect.h>
+#include <algorithm>
 #include <cmath>
 typedef float f32;
 typedef int i32;
