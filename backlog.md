@@ -25,15 +25,68 @@
 
 # PHASE 2 — MATH
 ## Vectors
-[ ] Vector2
-[ ] Vector3
+[X] Vector2
+[X] Vector3
 [ ] Vector4
+## Math APIs
 
+**Vector**
+[ ] Vector2, Vector3, Vector4
+[ ] add, subtract, scale, negate
+[ ] dot, cross
+[ ] length, lengthSquared, normalize
+[ ] lerp, slerp (for directions)
+[ ] reflect, refract, project, reject
+[ ] distance, distanceSquared
+[ ] min, max, clamp (component-wise)
+[ ]
+**Quaternion**
+[ ] multiply, conjugate, inverse, normalize
+[ ] fromAxisAngle, fromEuler, fromMatrix
+[ ] toMatrix, toEuler
+[ ] slerp, nlerp
+[ ] rotateVector
+[ ]
+**Scalar/utility**
+[ ] lerp, inverseLerp, remap
+[ ] clamp, saturate
+[ ] smoothstep, smootherstep
+[ ] easing functions (easeIn/Out/InOut variants)
+[ ] degrees↔radians
+[ ] approxEqual (epsilon compare)
+[ ] min, max, abs, sign
+
+
+
+## Camera APIs
+
+[ ] setPosition, setRotation/setOrientation (quaternion or Euler)
+[ ] lookAt(target, up)
+[ ] getViewMatrix, getProjectionMatrix, getViewProjectionMatrix
+[ ] setPerspective(fov, aspect, near, far)
+[ ] setOrthographic(left, right, bottom, top, near, far)
+[ ] getFrustumPlanes (6 planes, for culling)
+[ ] screenToWorldRay(screenPos) — unprojection/picking
+[ ] worldToScreen(worldPos)
+[ ] move/pan (relative translation in local space)
+[ ] orbit(target, deltaYaw, deltaPitch, distance)
+[ ] zoom(delta) / setFOV
+[ ] getForward, getRight, getUp (basis vectors from orientation)
+[ ] setNearFar, setAspectRatio
 ## Matrix
-[ ] Matrix3
+[X] Matrix3
 [ ] Matrix4
 [ ] Matrix Inverse
 [ ] Matrix Transpose
+**Matrix**
+[ ] Matrix3x3, Matrix4x4
+[ ] multiply, transpose, inverse, determinant
+[ ] identity, translation, rotationX/Y/Z, rotationAxisAngle, scale
+[ ] TRS composition/decomposition
+[ ] lookAt
+[ ] perspective, orthographic
+[ ] transformPoint, transformVector, transformNormal (inverse-transpose)
+
 
 ## Rotation
 [ ] Quaternion
@@ -48,7 +101,19 @@
 [ ] AABB
 [ ] OBB
 [ ] Frustum
+**Geometric primitives**
+[ ] AABB — construct, union, overlap, containsPoint, rayIntersect
+[ ] OBB — overlap (SAT)
+[ ] Sphere, Plane, Ray, Frustum, Capsule
+[ ] ray-triangle, ray-sphere, ray-AABB, ray-plane intersection
+[ ] sphere-sphere, AABB-AABB overlap
+[ ] frustum-AABB, frustum-sphere (culling)
+[ ] closestPointOnPlane, closestPointOnSegment
+[ ] barycentricCoordinates
 
+**Random/noise**
+[ ] PerlinNoise, SimplexNoise
+[ ] randomRange, randomUnitVector, randomInsideSphere
 ## Transform
 [ ] Transform
 [ ] Local Transform
