@@ -27,19 +27,18 @@
 ## Vectors
 [X] Vector2
 [X] Vector3
-[ ] Vector4
+[X] Vector4
 ## Math APIs
 
 **Vector**
-[ ] Vector2, Vector3, Vector4
-[ ] add, subtract, scale, negate
-[ ] dot, cross
-[ ] length, lengthSquared, normalize
-[ ] lerp, slerp (for directions)
-[ ] reflect, refract, project, reject
-[ ] distance, distanceSquared
-[ ] min, max, clamp (component-wise)
-[ ]
+[X] Vector2, Vector3, Vector4
+[X] add, subtract, scale, negate
+[X] dot, cross
+[X] length, lengthSquared, normalize
+[X] lerp, slerp (for directions)
+[X] reflect, refract, project, reject
+[X] distance, distanceSquared
+[X] min, max, clamp (component-wise)
 **Quaternion**
 [ ] multiply, conjugate, inverse, normalize
 [ ] fromAxisAngle, fromEuler, fromMatrix

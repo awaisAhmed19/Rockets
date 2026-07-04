@@ -5,9 +5,9 @@ namespace Engine {
 namespace math {
 struct Matrix3 {
   f32 data[3][3] = {{0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}};
-  Matrix3() = default;
-  Matrix3(f32 data00, f32 data01, f32 data02, f32 data10, f32 data11,
-          f32 data12, f32 data20, f32 data21, f32 data22) {
+  explicit Matrix3() = default;
+  explicit Matrix3(f32 data00, f32 data01, f32 data02, f32 data10, f32 data11,
+                   f32 data12, f32 data20, f32 data21, f32 data22) {
     data[0][0] = data00;
     data[0][1] = data01;
     data[0][2] = data02;
@@ -18,7 +18,8 @@ struct Matrix3 {
     data[2][1] = data21;
     data[2][2] = data22;
   }
-  Matrix3(const vector3 &data1, const vector3 &data2, const vector3 &data3) {
+  explicit Matrix3(const Vector3 &data1, const Vector3 &data2,
+                   const Vector3 &data3) {
     data[0][0] = data1.x;
     data[0][1] = data2.x;
     data[0][2] = data3.x;
@@ -30,13 +31,14 @@ struct Matrix3 {
     data[2][2] = data3.z;
   }
 
-  Matrix3(const f32 val) {
+  explicit Matrix3(const f32 val) {
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
         data[i][j] = val;
       }
     }
   }
+
   f32 *operator[](int row) {
     if (row < 0 || row >= 3) {
       throw std::out_of_range("Matrix3 row index out of range");
@@ -68,7 +70,7 @@ struct Matrix3 {
 
     return result;
   }
-  inline Matrix3 operator*(f32 scalar) const {
+  [[nodiscard]] inline Matrix3 operator*(f32 scalar) const {
     Matrix3 ret(*this);
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
@@ -77,7 +79,7 @@ struct Matrix3 {
     }
     return ret;
   }
-  inline Matrix3 operator/(f32 scalar) const {
+  [[nodiscard]] inline Matrix3 operator/(f32 scalar) const {
     RT_ASSERT(std::abs(scalar) > eps, "Scalar value cannot be zero");
     Matrix3 ret(*this);
     for (int i = 0; i < 3; ++i) {
@@ -104,21 +106,21 @@ struct Matrix3 {
     }
     return *this;
   }
-  inline Matrix3 operator+(const Matrix3 &v) const {
+  [[nodiscard]] inline Matrix3 operator+(const Matrix3 &v) const {
     return Matrix3(data[0][0] + v.data[0][0], data[0][1] + v.data[0][1],
                    data[0][2] + v.data[0][2], data[1][0] + v.data[1][0],
                    data[1][1] + v.data[1][1], data[1][2] + v.data[1][2],
                    data[2][0] + v.data[2][0], data[2][1] + v.data[2][1],
                    data[2][2] + v.data[2][2]);
   }
-  inline Matrix3 operator-(const Matrix3 &v) const {
+  [[nodiscard]] inline Matrix3 operator-(const Matrix3 &v) const {
     return Matrix3(data[0][0] - v.data[0][0], data[0][1] - v.data[0][1],
                    data[0][2] - v.data[0][2], data[1][0] - v.data[1][0],
                    data[1][1] - v.data[1][1], data[1][2] - v.data[1][2],
                    data[2][0] - v.data[2][0], data[2][1] - v.data[2][1],
                    data[2][2] - v.data[2][2]);
   }
-  inline Matrix3 operator*(const Matrix3 &v) const {
+  [[nodiscard]] inline Matrix3 operator*(const Matrix3 &v) const {
     Matrix3 c;
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
@@ -150,8 +152,8 @@ struct Matrix3 {
     *this = *this * v;
     return *this;
   }
-  vector3 operator*(const vector3 &a) const {
-    return vector3(data[0][0] * a.x + data[0][1] * a.y + data[0][2] * a.z,
+  [[nodiscard]] Vector3 operator*(const Vector3 &a) const {
+    return Vector3(data[0][0] * a.x + data[0][1] * a.y + data[0][2] * a.z,
                    data[1][0] * a.x + data[1][1] * a.y + data[1][2] * a.z,
                    data[2][0] * a.x + data[2][1] * a.y + data[2][2] * a.z);
   }
@@ -196,7 +198,7 @@ struct Matrix3 {
     return Matrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
   }
 
-  inline Matrix3 cofactor() const {
+  [[nodiscard]] inline Matrix3 cofactor() const {
     Matrix3 minors(this->minors());
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
@@ -219,10 +221,10 @@ struct Matrix3 {
     return ret.adjugated();
   }
   // inverse()
-  [[nodiscard]] inline Matrix3 inversed() {
+  [[nodiscard]] inline Matrix3 inversed() const {
     f32 det = determinant();
     RT_ASSERT(std::abs(det) > eps, "Matrix is singular.");
-    return this->adjugate() * (1.f / this->determinant());
+    return this->adjugate() * (1.f / det);
   }
 
   inline Matrix3 inverse() const {
@@ -243,21 +245,6 @@ struct Matrix3 {
   }
 
   static Matrix3 zero() { return Matrix3(); }
-
-  /*
-
-
-  invert()
-
-
-  identity()
-  zero()
-
-  isIdentity()
-  isZero()
-
-  data()
-  */
 };
 }; // namespace math
 }; // namespace Engine

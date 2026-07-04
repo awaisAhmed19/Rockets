@@ -1,4 +1,5 @@
 #include "Engine/Platform/Window.h"
+#include "Engine/core/Tester.h"
 // #include "core/core.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
@@ -131,7 +132,4 @@ void stop() {
   SDL_Quit();
 }
 
-int main() {
-  // start();
-  return 0;
-}
+int main() { return Tester::runAll(); }
