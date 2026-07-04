@@ -4,15 +4,15 @@ using namespace Engine::math;
 
 TEST_CASE("matrix3 identity multiply is identity") {
   Matrix3 id = Matrix3::identity();
-  vector3 v(1.f, 2.f, 3.f);
-  vector3 r = id * v;
+  Vector3 v(1.f, 2.f, 3.f);
+  Vector3 r = id * v;
   CHECK_NEAR(r.x, v.x, 1e-6f);
   CHECK_NEAR(r.y, v.y, 1e-6f);
   CHECK_NEAR(r.z, v.z, 1e-6f);
 }
 
 TEST_CASE("matrix3 column-vector constructor") {
-  vector3 c0(1.f, 4.f, 7.f), c1(2.f, 5.f, 8.f), c2(3.f, 6.f, 9.f);
+  Vector3 c0(1.f, 4.f, 7.f), c1(2.f, 5.f, 8.f), c2(3.f, 6.f, 9.f);
   Matrix3 m(c0, c1, c2);
   CHECK_NEAR(m[0][0], 1.f, 1e-6f);
   CHECK_NEAR(m[0][1], 2.f, 1e-6f);
@@ -71,8 +71,8 @@ TEST_CASE("matrix3 rotation about Z preserves vector length") {
   f32 theta = 0.6f;
   Matrix3 rot(std::cos(theta), -std::sin(theta), 0.f, std::sin(theta),
               std::cos(theta), 0.f, 0.f, 0.f, 1.f);
-  vector3 v(1.f, 0.f, 0.f);
-  vector3 rotated = rot * v;
+  Vector3 v(1.f, 0.f, 0.f);
+  Vector3 rotated = rot * v;
   CHECK_NEAR(rotated.magnitude(), v.magnitude(), 1e-4f);
 }
 

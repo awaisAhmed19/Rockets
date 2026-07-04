@@ -13,7 +13,7 @@ struct Matrix2 {
     data[1][1] = data11;
   }
 
-  Matrix2(const vector2 &data1, const vector2 &data2) {
+  Matrix2(const Vector2 &data1, const Vector2 &data2) {
     data[0][0] = data1.x;
     data[0][1] = data2.x;
     data[1][0] = data1.y;
@@ -134,8 +134,8 @@ struct Matrix2 {
     *this = *this * v;
     return *this;
   }
-  vector2 operator*(const vector2 &a) const {
-    return vector2(data[0][0] * a.x + data[0][1] * a.y,
+  Vector2 operator*(const Vector2 &a) const {
+    return Vector2(data[0][0] * a.x + data[0][1] * a.y,
                    data[1][0] * a.x + data[1][1] * a.y);
   }
   friend Matrix2 operator*(f32 s, const Matrix2 &m) { return m * s; }

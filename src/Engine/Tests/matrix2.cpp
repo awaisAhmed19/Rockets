@@ -4,15 +4,15 @@ using namespace Engine::math;
 
 TEST_CASE("matrix2 identity multiply is identity") {
   Matrix2 id = Matrix2::identity();
-  vector2 v(3.f, 4.f);
-  vector2 r = id * v;
+  Vector2 v(3.f, 4.f);
+  Vector2 r = id * v;
   CHECK_NEAR(r.x, v.x, 1e-6f);
   CHECK_NEAR(r.y, v.y, 1e-6f);
 }
 
 TEST_CASE("matrix2 column-vector constructor matches Matrix3 convention") {
   // c0, c1 are COLUMNS: [c0.x c1.x; c0.y c1.y]
-  vector2 c0(1.f, 3.f), c1(2.f, 4.f);
+  Vector2 c0(1.f, 3.f), c1(2.f, 4.f);
   Matrix2 m(c0, c1);
   CHECK_NEAR(m[0][0], 1.f, 1e-6f);
   CHECK_NEAR(m[0][1], 2.f, 1e-6f);
