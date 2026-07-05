@@ -6,9 +6,15 @@
 #include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_video.h>
+#include <cassert>
 #include <iostream>
 #include <map>
 
+#include "Engine/core/Config/ConfigFile.h"
+#include "Engine/core/Config/Entry.h"
+#include "Engine/core/Config/PrimitiveEntry.h"
+#include "Engine/core/Config/StringEntry.h"
+#include "Engine/core/Config/VectorEntry.h"
 #define UPDATE_INTERVAL 1000 / 60
 
 int SCREEN_WIDTH = 800;
@@ -132,4 +138,73 @@ void stop() {
   SDL_Quit();
 }
 
-int main() { return Tester::runAll(); }
+using namespace Engine::Config;
+
+static void print_config(const GenHashMap &map) {
+  std::cout << "---------------------------------\n";
+
+  for (const auto &[name, entry] : map) {
+    std::string type;
+    std::string value;
+
+    type = entry->type_name();
+    entry->write_val_string(&value);
+
+    std::cout << type << " " << name << " = " << value << '\n';
+  }
+  std::cout << "---------------------------------\n";
+}
+int main() {
+  GenHashMap config;
+  config["int"] = new IntEntry(42);
+  config["title"] = new StringEntry("Hello Engine");
+  config["position"] = new VectorFloatEntry({1.0f, 2.0f, 3.0f});
+
+  std::cout << "\nInitial values\n";
+
+  print_config(config);
+
+  bool ok = SaveFile("config.cfg", config, "Config parser test");
+
+  assert(ok);
+
+  static_cast<IntEntry *>(config["int"])->set(-100);
+
+  static_cast<StringEntry *>(config["title"])->set("Changed");
+
+  static_cast<VectorFloatEntry *>(config["position"])->set({9.f, 9.f, 9.f});
+
+  std::cout << "\nModified values\n";
+
+  print_config(config);
+
+  ok = LoadFile("config.cfg", config);
+
+  assert(ok);
+
+  std::cout << "\nReloaded values\n";
+
+  print_config(config);
+
+  int value = static_cast<IntEntry *>(config["int"])->get();
+
+  assert(value == 42);
+
+  std::string text = static_cast<StringEntry *>(config["title"])->get();
+
+  assert(text == "Hello Engine");
+
+  std::vector<float> vec =
+      static_cast<VectorFloatEntry *>(config["position"])->get();
+
+  assert(vec.size() == 3);
+  assert(vec[0] == 1.f);
+  assert(vec[1] == 2.f);
+  assert(vec[2] == 3.f);
+
+  clear_genhashmap(config);
+
+  std::cout << "\nAll ConfigFile tests passed!\n";
+
+  return 0;
+}

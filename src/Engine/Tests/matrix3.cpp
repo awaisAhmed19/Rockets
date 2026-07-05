@@ -2,6 +2,7 @@
 #include "Engine/core/Tester.h"
 using namespace Engine::math;
 
+using namespace Engine;
 TEST_CASE("matrix3 identity multiply is identity") {
   Matrix3 id = Matrix3::identity();
   Vector3 v(1.f, 2.f, 3.f);

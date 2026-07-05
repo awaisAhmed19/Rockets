@@ -2,6 +2,7 @@
 #include "Engine/core/Tester.h"
 using namespace Engine::math;
 
+using namespace Engine;
 TEST_CASE("Vector2 construction and indexing") {
   Vector2 v(3.f, 4.f);
   CHECK_NEAR(v.x, 3.f, 1e-6f);

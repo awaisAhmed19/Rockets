@@ -1,7 +1,7 @@
 #include "Engine/Math/Matrix.h"
 #include "Engine/core/Tester.h"
 using namespace Engine::math;
-
+using namespace Engine;
 TEST_CASE("matrixN construction via initializer list") {
   Matrix<f32, 2, 3> m{{1.f, 2.f, 3.f}, {4.f, 5.f, 6.f}};
   CHECK_NEAR(m[0][0], 1.f, 1e-6f);

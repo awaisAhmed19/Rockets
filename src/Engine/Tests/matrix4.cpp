@@ -2,6 +2,7 @@
 #include "Engine/core/Tester.h"
 using namespace Engine::math;
 
+using namespace Engine;
 constexpr f32 kPi = 3.14159265358979323846f;
 
 TEST_CASE("matrix4 identity multiply is identity") {
