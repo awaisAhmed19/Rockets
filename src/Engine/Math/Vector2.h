@@ -1,6 +1,6 @@
 #pragma once
+#include "Engine/Core/Core.h"
 #include "Engine/Math/Constants.h"
-#include "Engine/core/core.h"
 #include <cmath>
 namespace Engine {
 

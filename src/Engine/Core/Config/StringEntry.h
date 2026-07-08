@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/core/Utitlity/StringUtils.h"
+#include "Engine/Core/Utitlity/StringUtils.h"
 #include "PrimitiveEntry.h"
 
 using namespace Engine::String;

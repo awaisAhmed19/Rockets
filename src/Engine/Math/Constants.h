@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/core/core.h"
+#include "Engine/Core/Core.h"
 namespace Engine {
 namespace math {
 constexpr f32 eps = 1e-6f;

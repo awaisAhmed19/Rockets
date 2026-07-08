@@ -1,9 +1,9 @@
 #pragma once
+#include "Engine/Core/Core.h"
 #include "Engine/Math/Constants.h"
 #include "Engine/Math/Vector2.h"
 #include "Engine/Math/Vector3.h"
 #include "Engine/Math/Vector4.h"
-#include "Engine/core/core.h"
 namespace Engine {
 namespace math {
 struct quaternion {
@@ -25,39 +25,39 @@ struct quaternion {
   f32 &operator[](int i) { return ((&x)[i]); }
   const f32 &operator[](int i) const { return ((&x)[i]); }
   inline quaternion operator*(const f32 scalar) const {
-    return (quaternion(x * scalar, y * scalar, z * scalar, w * scalar));
+    return (quaternion(w * scalar, x * scalar, y * scalar, z * scalar));
   }
 
   inline quaternion operator+(const f32 scalar) {
-    return (quaternion(x + scalar, y + scalar, z + scalar, w + scalar));
+    return (quaternion(w + scalar, x + scalar, y + scalar, z + scalar));
   }
 
   inline quaternion operator-(const f32 scalar) {
-    return (quaternion(x - scalar, y - scalar, z - scalar, w - scalar));
+    return (quaternion(w - scalar, x - scalar, y - scalar, z - scalar));
   }
   inline quaternion operator-(const quaternion &v) const {
-    return quaternion(x - v.x, y - v.y, z - v.z, w - v.w);
+    return quaternion(w - v.w, x - v.x, y - v.y, z - v.z);
   }
   inline quaternion operator+(const quaternion &v) const {
-    return quaternion(x + v.x, y + v.y, z + v.z, w + v.w);
+    return quaternion(w + v.w, x + v.x, y + v.y, z + v.z);
   }
   inline quaternion operator*(const quaternion &v) const {
-    return quaternion(x * v.x, y * v.y, z * v.z, w * v.w);
+    return quaternion(w * v.w, x * v.x, y * v.y, z * v.z);
   }
-  inline quaternion operator-() const { return quaternion(-x, -y, -z, -w); }
+  inline quaternion operator-() const { return quaternion(-w, -x, -y, -z); }
 
   inline quaternion operator/(const quaternion &v) const {
     RT_ASSERT(!v.isZero(),
               "Division by zero in math::quaternion::this->operator/; Hint : "
               "check your input vector u/ v/ <- ");
-    return quaternion(x / v.x, y / v.y, z / v.z, w / v.w);
+    return quaternion(w / v.w, x / v.x, y / v.y, z / v.z);
   }
 
   inline quaternion &operator*=(const f32 scalar) {
+    w *= scalar;
     x *= scalar;
     y *= scalar;
     z *= scalar;
-    w *= scalar;
     return (*this);
   }
 
@@ -65,89 +65,89 @@ struct quaternion {
     scalar = 1.f / scalar;
     RT_ASSERT(std::abs(scalar) > eps,
               "scalar less than or equal to zero in /= scalar");
+    w *= scalar;
     x *= scalar;
     y *= scalar;
     z *= scalar;
-    w *= scalar;
     return (*this);
   }
 
   inline quaternion &operator-=(const quaternion &v) {
+    w -= v.w;
     x -= v.x;
     y -= v.y;
     z -= v.z;
-    w -= v.w;
     return *this;
   }
   inline quaternion &operator+=(const quaternion &v) {
+    w += v.w;
     x += v.x;
     y += v.y;
     z += v.z;
-    w += v.w;
     return *this;
   }
   inline quaternion &operator*=(const quaternion &v) {
+    w *= v.w;
     x *= v.x;
     y *= v.y;
     z *= v.z;
-    w *= v.w;
     return *this;
   }
   inline quaternion &operator/=(const quaternion &v) {
     RT_ASSERT(!v.isZero(),
               "Division by zero in math::quaternion::this->operator/; Hint : "
               "check your input vector u/ v <- ");
+    w /= v.w;
     x /= v.x;
     y /= v.y;
     z /= v.z;
-    w /= v.w;
     return *this;
   }
 
   inline bool isZero() const {
-    return (std::abs(x) < eps && std::abs(y) < eps && std::abs(z) < eps &&
-            std::abs(w) < eps);
+    return (std::abs(w) < eps && std::abs(x) < eps && std::abs(y) < eps &&
+            std::abs(z) < eps);
   }
   bool operator==(const quaternion &v) const {
-    return (x == v.x && y == v.y && z == v.z && w == v.w);
+    return (w == v.w && x == v.x && y == v.y && z == v.z);
   }
 
   bool operator!=(const quaternion &v) const {
-    return (x != v.x || y != v.y || z != v.z || w != v.w);
+    return (w != v.w || x != v.x || y != v.y || z != v.z);
   }
 
   inline friend quaternion operator*(f32 factor, const quaternion &u) {
-    return quaternion(factor * u.x, factor * u.y, factor * u.z, factor * u.w);
+    return quaternion(factor * u.w, factor * u.x, factor * u.y, factor * u.z);
   }
 
   inline friend quaternion operator-(f32 factor, const quaternion &u) {
-    return quaternion(factor - u.x, factor - u.y, factor - u.z, factor - u.w);
+    return quaternion(factor - u.w, factor - u.x, factor - u.y, factor - u.z);
   }
 
   inline friend quaternion operator+(f32 factor, const quaternion &u) {
-    return quaternion(factor + u.x, factor + u.y, factor + u.z, factor + u.w);
+    return quaternion(factor + u.w, factor + u.x, factor + u.y, factor + u.z);
   }
 
   inline friend quaternion operator/(f32 factor, const quaternion &u) {
-    return quaternion(factor / u.x, factor / u.y, factor / u.z, factor / u.w);
+    return quaternion(factor / u.w, factor / u.x, factor / u.y, factor / u.z);
   }
 
   void invert() {
+    w = -w;
     x = -x;
     y = -y;
     z = -z;
-    w = -w;
   }
 
   inline f32 scalarProduct(const quaternion &v) const {
-    return (x * v.x) + (y * v.y) + (z * v.z) + (w * v.w);
+    return (w * v.w) + (x * v.x) + (y * v.y) + (z * v.z);
   }
 
   inline f32 magnitude() const {
+    f32 dw = w * w;
     f32 dx = x * x;
     f32 dy = y * y;
     f32 dz = z * z;
-    f32 dw = w * w;
     return std::sqrt(dx + dy + dz + dw);
   }
   inline f32 magnitudeSquared() const { return x * x + y * y + z * z + w * w; }
@@ -163,7 +163,7 @@ struct quaternion {
   inline quaternion normalized() const {
     f32 mag = this->magnitude();
     RT_ASSERT(mag > eps, "cannot normalize zero vector");
-    return {x / mag, y / mag, z / mag, w / mag};
+    return {w / mag, x / mag, y / mag, z / mag};
   }
 
   // inline quaternion crossProduct(const quaternion &v) const {
@@ -229,7 +229,7 @@ struct quaternion {
   inline f32 maxComponent() const { return std::max({x, y, z, w}); }
   inline f32 minComponent() const { return std::min({x, y, z, w}); }
   quaternion hadamardProduct(const quaternion &v) const {
-    return {x * v.x, y * v.y, z * v.z, w * v.w};
+    return {w * v.w, x * v.x, y * v.y, z * v.z};
   }
   quaternion clampMagnitude(float maxLength) const {
     float len = magnitude();
@@ -263,8 +263,8 @@ struct quaternion {
     f32 ratioA = std::sin((1 - t) * theta) / sintheta;
     f32 ratioB = std::sin(t * theta) / sintheta;
 
-    return {x * ratioA + cv.x * ratioB, y * ratioA + cv.y * ratioB,
-            z * ratioA + cv.z * ratioB, w * ratioA + cv.w * ratioB};
+    return {w * ratioA + cv.w * ratioB, x * ratioA + cv.x * ratioB,
+            y * ratioA + cv.y * ratioB, z * ratioA + cv.z * ratioB};
   }
   Vector3 xyz() const {
     f32 nx = x;
@@ -280,12 +280,12 @@ struct quaternion {
 };
 
 inline quaternion max(const quaternion &u, const quaternion &v) {
-  return quaternion(std::max(u.x, v.x), std::max(u.y, v.y), std::max(u.z, v.z),
-                    std::max(u.w, v.w));
+  return quaternion(std::max(u.w, v.w), std::max(u.x, v.x), std::max(u.y, v.y),
+                    std::max(u.z, v.z));
 }
 inline quaternion min(const quaternion &u, const quaternion &v) {
-  return quaternion(std::min(u.x, v.x), std::min(u.y, v.y), std::min(u.z, v.z),
-                    std::min(u.w, v.w));
+  return quaternion(std::min(u.w, v.w), std::min(u.x, v.x), std::min(u.y, v.y),
+                    std::min(u.z, v.z));
 }
 inline quaternion maxlength(const quaternion &u, const quaternion &v) {
   return u.magnitudeSquared() > v.magnitudeSquared() ? u : v;
@@ -295,20 +295,20 @@ inline quaternion minlength(const quaternion &u, const quaternion &v) {
 }
 
 inline quaternion abs(const quaternion &u) {
-  return quaternion(std::abs(u.x), std::abs(u.y), std::abs(u.z), std::abs(u.w));
+  return quaternion(std::abs(u.w), std::abs(u.x), std::abs(u.y), std::abs(u.z));
 }
 
 inline quaternion ceil(const quaternion &u) {
-  return quaternion(std::ceil(u.x), std::ceil(u.y), std::ceil(u.z),
-                    std::ceil(u.w));
+  return quaternion(std::ceil(u.w), std::ceil(u.x), std::ceil(u.y),
+                    std::ceil(u.z));
 }
 inline quaternion floor(const quaternion &u) {
-  return quaternion(std::floor(u.x), std::floor(u.y), std::floor(u.z),
-                    std::floor(u.w));
+  return quaternion(std::floor(u.w), std::floor(u.x), std::floor(u.y),
+                    std::floor(u.z));
 }
 inline quaternion round(const quaternion &u) {
-  return quaternion(std::round(u.x), std::round(u.y), std::round(u.z),
-                    std::round(u.w));
+  return quaternion(std::round(u.w), std::round(u.x), std::round(u.y),
+                    std::round(u.z));
 }
 }; // namespace math
 

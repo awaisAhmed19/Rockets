@@ -1,6 +1,6 @@
 #include "ConfigParser.h"
 
-#include "Engine/core/Utitlity/StringUtils.h"
+#include "Engine/Core/Utitlity/StringUtils.h"
 
 #include <iostream>
 #include <sstream>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/core/core.h"
+#include "Engine/Core/Core.h"
 #include <array>
 #include <cmath>
 #include <stdexcept>
