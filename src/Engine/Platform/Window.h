@@ -25,12 +25,15 @@ public:
 
   bool Init(const Window_description &desc);
 
-  void Shutdown();
-  void OnResized(int n_width, int n_height);
+  void shutdown();
+  void onResized(int n_width, int n_height);
   SDL_Window *Handle() const { return m_window; }
 
-  int Width() const { return m_width; }
-  int Height() const { return m_height; }
+  int getWidth() const { return m_width; }
+  int setHeight() const { return m_height; }
+  void setWidth(const int width) { m_width = width; }
+  void setHeight(const int height) { m_height = height; }
+  SDL_Window *getWindowPointer() { return m_window; }
 
   float AspectRatio() const;
 

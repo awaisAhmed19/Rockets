@@ -2,13 +2,13 @@
 
 namespace Engine {
 
-Window::~Window() { Shutdown(); }
+Window::~Window() { shutdown(); }
 
 Window::Window(Window &&other) noexcept { MoveFrom(other); }
 
 Window &Window::operator=(Window &&other) noexcept {
   if (this != &other) {
-    Shutdown();
+    shutdown();
     MoveFrom(other);
   }
   return *this;
@@ -36,7 +36,7 @@ bool Window::Init(const Window_description &desc) {
   const int height = desc.height > 0 ? desc.height : 1;
 
   const bool videoAlreadyInit = SDL_WasInit(SDL_INIT_VIDEO) != 0;
-  if (SDL_InitSubSystem(SDL_INIT_VIDEO)) {
+  if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
     SDL_Log("Failed to initialize SDL Video Subsystem: %s", SDL_GetError());
     return false;
   }
@@ -64,7 +64,7 @@ bool Window::Init(const Window_description &desc) {
   return true;
 }
 
-void Window::Shutdown() {
+void Window::shutdown() {
 
   if (m_window != nullptr) {
     SDL_DestroyWindow(m_window);
@@ -79,7 +79,7 @@ void Window::Shutdown() {
   m_height = 0;
 }
 
-void Window::OnResized(int n_width, int n_height) {
+void Window::onResized(int n_width, int n_height) {
   if (n_width > 0) {
     m_width = n_width;
   }

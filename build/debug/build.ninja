@@ -130,6 +130,36 @@ build libimgui.a: CXX_STATIC_LIBRARY_LINKER__imgui_Debug CMakeFiles/imgui.dir/th
 
 build cmake_object_order_depends_target_rockets: phony || cmake_object_order_depends_target_imgui
 
+build CMakeFiles/rockets.dir/src/App/Application.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/App/Application.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/App/Application.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/App
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Core/Config/ConfigFile.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Core/Config
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Core/Config/ConfigParser.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Core/Config
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
 build CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Platform/Window.cpp || cmake_object_order_depends_target_rockets
   CONFIG = Debug
   DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
@@ -210,26 +240,6 @@ build CMakeFiles/rockets.dir/src/Engine/Tests/vector4.cpp.o: CXX_COMPILER__rocke
   OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Tests
   TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
 
-build CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigFile.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/core/Config/ConfigFile.cpp || cmake_object_order_depends_target_rockets
-  CONFIG = Debug
-  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
-  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigFile.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
-  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
-  OBJECT_DIR = CMakeFiles/rockets.dir
-  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/core/Config
-  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
-
-build CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigParser.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/core/Config/ConfigParser.cpp || cmake_object_order_depends_target_rockets
-  CONFIG = Debug
-  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
-  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigParser.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
-  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
-  OBJECT_DIR = CMakeFiles/rockets.dir
-  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/core/Config
-  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
-
 build CMakeFiles/rockets.dir/src/main.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/main.cpp || cmake_object_order_depends_target_rockets
   CONFIG = Debug
   DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
@@ -248,7 +258,7 @@ build CMakeFiles/rockets.dir/src/main.cpp.o: CXX_COMPILER__rockets_unscanned_Deb
 #############################################
 # Link the executable rockets
 
-build rockets: CXX_EXECUTABLE_LINKER__rockets_Debug CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix4.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector4.cpp.o CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigFile.cpp.o CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigParser.cpp.o CMakeFiles/rockets.dir/src/main.cpp.o | /usr/lib/libSDL3_image.so.0.4.4 /usr/lib/libSDL3_ttf.so.0.2.2 libimgui.a /usr/lib/libSDL3.so.0.4.10 || libimgui.a
+build rockets: CXX_EXECUTABLE_LINKER__rockets_Debug CMakeFiles/rockets.dir/src/App/Application.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix4.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector4.cpp.o CMakeFiles/rockets.dir/src/main.cpp.o | /usr/lib/libSDL3_image.so.0.4.4 /usr/lib/libSDL3_ttf.so.0.2.2 libimgui.a /usr/lib/libSDL3.so.0.4.10 || libimgui.a
   CONFIG = Debug
   DEP_FILE = CMakeFiles/rockets.dir/link.d
   FLAGS = -g
