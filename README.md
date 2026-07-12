@@ -196,7 +196,7 @@ sdl3_ttf
 Clone the repository.
 
 ```bash
-git clone <repository>
+git clone https://github.com/awaisAhmed19/Rockets.git
 cd Rockets
 ```
 
