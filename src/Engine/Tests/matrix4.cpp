@@ -29,17 +29,17 @@ TEST_CASE("matrix4 scale scales points and directions equally") {
   CHECK_NEAR(point.z, 4.f, 1e-5f);
 }
 
-TEST_CASE("matrix4 rotationZ by 90 degrees rotates X axis to Y axis") {
-  Matrix4 r = Matrix4::rotationZ(kPi / 2.f);
+TEST_CASE("matrix4 rotateZ by 90 degrees rotates X axis to Y axis") {
+  Matrix4 r = Matrix4::rotateZ(kPi / 2.f);
   Vector3 result = r.transformVector(Vector3(1.f, 0.f, 0.f));
   CHECK_NEAR(result.x, 0.f, 1e-4f);
   CHECK_NEAR(result.y, 1.f, 1e-4f);
 }
 
-TEST_CASE("matrix4 rotationAxisAngle about Y matches rotationY") {
+TEST_CASE("matrix4 rotateAxisAngle about Y matches rotateY") {
   f32 angle = 0.85f;
-  Matrix4 r1 = Matrix4::rotationY(angle);
-  Matrix4 r2 = Matrix4::rotationAxisAngle(Vector3(0.f, 1.f, 0.f), angle);
+  Matrix4 r1 = Matrix4::rotateY(angle);
+  Matrix4 r2 = Matrix4::rotateAxisAngle(Vector3(0.f, 1.f, 0.f), angle);
   Vector3 v(1.f, 0.5f, 0.25f);
   Vector3 a = r1.transformVector(v);
   Vector3 b = r2.transformVector(v);
@@ -49,8 +49,8 @@ TEST_CASE("matrix4 rotationAxisAngle about Y matches rotationY") {
 }
 
 TEST_CASE(
-    "matrix4 TRS composition applies scale, then rotation, then translation") {
-  Matrix4 rot = Matrix4::rotationZ(kPi / 2.f);
+    "matrix4 TRS composition applies scale, then rotate, then translation") {
+  Matrix4 rot = Matrix4::rotateZ(kPi / 2.f);
   Matrix4 trs =
       Matrix4::trs(Vector3(10.f, 0.f, 0.f), rot, Vector3(2.f, 2.f, 2.f));
   Vector3 result = trs.transformPoint(Vector3(1.f, 0.f, 0.f));
@@ -100,7 +100,7 @@ TEST_CASE("matrix4 orthographic maps box corners to NDC cube") {
 }
 
 TEST_CASE("matrix4 inverse composed with original is identity") {
-  Matrix4 m = Matrix4::trs(Vector3(3.f, -2.f, 1.f), Matrix4::rotationY(0.4f),
+  Matrix4 m = Matrix4::trs(Vector3(3.f, -2.f, 1.f), Matrix4::rotateY(0.4f),
                            Vector3(1.5f, 1.5f, 1.5f));
   Matrix4 inv = m.inversed();
   Matrix4 result = m * inv;
@@ -113,7 +113,7 @@ TEST_CASE("matrix4 inverse composed with original is identity") {
 TEST_CASE(
     "matrix4 rigidInverse matches general inverse for a TR-only transform") {
   Matrix4 m = Matrix4::trs(
-      Vector3(3.f, -2.f, 1.f), Matrix4::rotationY(0.4f),
+      Vector3(3.f, -2.f, 1.f), Matrix4::rotateY(0.4f),
       Vector3(1.f, 1.f, 1.f)); // uniform scale = 1, safe for rigidInverse
   Matrix4 generalInv = m.inversed();
   Matrix4 rigidInv = m.rigidInverse();
