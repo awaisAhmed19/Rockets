@@ -1,122 +1,145 @@
 #include "Application.h"
+#include "Engine/Core/Time.h"
 #include <iostream>
-#include <map>
-namespace App {
-
-std::map<int, int> keys;
-int frameSkip = 0;
-int isRunning = 0;
-int SCREENWIDTH = 1280;
-int SCREENHEIGHT = 720;
-
-// SDL_Window *window = nullptr;
-Engine::Window window;
-SDL_Renderer *renderer = nullptr;
-SDL_Surface *surf = nullptr;
 
 const std::string TITLE = "Rockets";
 
-void draw() {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-  SDL_RenderClear(renderer);
+void App::draw() {
+  SDL_SetRenderDrawColor(m_renderer, 0, 114, 114, SDL_ALPHA_OPAQUE);
+  SDL_RenderClear(m_renderer);
   // to draw;
-  SDL_RenderPresent(renderer);
+  SDL_RenderPresent(m_renderer);
 }
 
-void fpsChange(int fps) {
-  char szFps[128];
-  sprintf(szFps, "%s: %d FPS", "Rocket Game - ", fps);
-  SDL_SetWindowTitle(window.getWindowPointer(), szFps);
+void App::fpsChange(int fps) {
+  m_window.setTitle(TITLE + " - " + std::to_string(fps) + " FPS");
 }
 
-void onQuit() { isRunning = 0; }
+void App::onQuit() { m_running = false; }
 
-void onKeyDown(SDL_Event *e) { keys[e->key.key] = 1; }
+void App::onEvent(const Engine::Event &e) {
+  switch (e.type) {
+  case Engine::EventType::WindowClose:
+    onQuit();
+    break;
 
-void onKeyUp(SDL_Event *e) { keys[e->key.key] = 0; }
+  case Engine::EventType::KeyDown:
+    m_keyboard.keyDown(e.keyboard.key);
+    break;
 
-void update() {
-  if (keys[SDLK_LEFT]) {
+  case Engine::EventType::KeyUp:
+    m_keyboard.keyUp(e.keyboard.key);
+    break;
+
+  case Engine::EventType::MouseMove:
+    m_mouse.move(e.mouse.x, e.mouse.y);
+    break;
+
+  case Engine::EventType::MouseDown:
+    m_mouse.buttonDown(e.mouse.button);
+    break;
+
+  case Engine::EventType::MouseUp:
+    m_mouse.buttonUp(e.mouse.button);
+    break;
+  case Engine::EventType::MouseWheel:
+    m_mouse.wheel(e.mouse.wheelX, e.mouse.wheelY);
+    break;
+
+  case Engine::EventType::WindowResize:
+    m_window.onResized(e.window.width, e.window.height);
+    break;
+  default:
+    break;
+  }
+}
+
+void App::update(Engine::f64 deltaTime) {
+  if (m_keyboard.pressed(SDLK_LEFT)) {
     // move left
-  } else if (keys[SDLK_RIGHT]) {
+  } else if (m_keyboard.pressed(SDLK_RIGHT)) {
     // move right
-  } else if (keys[SDLK_UP]) {
+  } else if (m_keyboard.pressed(SDLK_UP)) {
     // move UP
-  } else if (keys[SDLK_DOWN]) {
+  } else if (m_keyboard.pressed(SDLK_DOWN)) {
     // move down
   }
 }
 
-void run() {
+void App::run() {
+  Engine::Timer frameTimer;
+  Engine::Timer fpsTimer;
 
-  int past = SDL_GetTicks();
-  int now = past, pastFps = past;
-  int fps = 0, frameSkipped = 0;
+  Engine::Event event;
 
-  SDL_Event event;
+  int fps = 0;
 
-  while (isRunning) {
-    int timeElapsed = 0;
-    if (SDL_PollEvent(&event)) {
-      switch (event.type) {
-      case SDL_EVENT_QUIT:
-        onQuit();
-        break;
-      case SDL_EVENT_KEY_DOWN:
-        onKeyDown(&event);
-        break;
-      case SDL_EVENT_KEY_UP:
-        onKeyUp(&event);
-        break;
-      case SDL_EVENT_MOUSE_BUTTON_DOWN:
-      case SDL_EVENT_MOUSE_BUTTON_UP:
-      case SDL_EVENT_MOUSE_MOTION:
-        break;
-      }
+  while (m_running) {
+    m_keyboard.beginFrame();
+    m_mouse.beginFrame();
+
+    while (m_dispatcher.poll(event)) {
+      onEvent(event);
     }
 
-    timeElapsed = (now = SDL_GetTicks()) - past;
-    if (timeElapsed >= UPDATE_INTERVAL) {
-      past = now;
-      update();
+    if (frameTimer.milliseconds() >= UPDATE_INTERVAL) {
+      Engine::f64 deltaTime = frameTimer.seconds();
+      frameTimer.reset();
 
-      if (frameSkipped++ >= frameSkip) {
-        draw();
-      }
+      update(deltaTime);
+      draw();
+
+      ++fps;
     }
 
-    if (now - pastFps >= 1000) {
-      pastFps = now;
+    if (fpsTimer.seconds() >= 1.0) {
       fpsChange(fps);
       fps = 0;
+      fpsTimer.reset();
     }
+
+    m_keyboard.endFrame();
+    m_mouse.endFrame();
 
     SDL_Delay(1);
   }
 }
-void start() {
-  Engine::Window_description desc;
 
-  desc.TITLE = TITLE;
-  desc.width = SCREENWIDTH;
-  desc.height = SCREENHEIGHT;
-  desc.resizeable = true;
-
-  if (!window.Init(desc)) {
-    std::cerr << SDL_GetError() << '\n';
-    SDL_Quit();
+void App::start() {
+  if (!m_platform.init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_GAMEPAD)) {
     return;
   }
-  isRunning = 1;
+
+  Engine::WindowDescription desc;
+  desc.title = TITLE;
+  desc.width = SCREEN_WIDTH;
+  desc.height = SCREEN_HEIGHT;
+
+  if (!m_window.create(desc)) {
+    stop();
+    return;
+  }
+  m_renderer = SDL_CreateRenderer(m_window.handle(), nullptr);
+
+  if (!m_renderer) {
+    SDL_Log("%s", SDL_GetError());
+    stop();
+    return;
+  }
+
+  m_running = true;
+
   run();
+
+  stop();
 }
 
-void stop() {
-  if (renderer) {
-    SDL_DestroyRenderer(renderer);
-    renderer = nullptr;
+void App::stop() {
+  if (m_renderer) {
+    SDL_DestroyRenderer(m_renderer);
+    m_renderer = nullptr;
   }
-  window.shutdown();
-  SDL_Quit();
+
+  m_window.close();
+  m_platform.shutdown();
 }
-}; // namespace App

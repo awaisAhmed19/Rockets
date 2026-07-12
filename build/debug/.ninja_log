@@ -1,15 +1,15 @@
 # ninja log v7
-2	13	1783522345242723008	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
+2	8	1783874429581491932	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
 8	6374	1783235234960723147	CMakeFiles/imgui.dir/third_party/imgui/imgui_draw.cpp.o	709f04787161e408
 8	7914	1783235234957975354	CMakeFiles/imgui.dir/third_party/imgui/imgui.cpp.o	83e1be3b10db1d91
 6375	9762	1783235241325058694	CMakeFiles/imgui.dir/third_party/imgui/imgui_tables.cpp.o	d014f28a8bc6780e
 9762	10382	1783235244711954026	CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_sdl3.cpp.o	a3ed144f61de902d
 10384	10727	1783235245335329927	CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_sdlrenderer3.cpp.o	5ce565b7569273c4
-15	2551	1783522345262063053	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
+4411	8511	1783874362846182884	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
 7914	12994	1783235242865162098	CMakeFiles/imgui.dir/third_party/imgui/imgui_widgets.cpp.o	e82ea59f654a1141
 12994	13164	1783235247942176059	libimgui.a	74b1ad05dd00eaa5
-2832	3238	1783522348072681401	rockets	71e7c9b21abf64e5
-9	1231	1783521564253978538	CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o	f8b796c3a13ed165
+5740	6212	1783872182531048358	rockets	c745550db9e0e6da
+2957	4410	1783874361392879661	CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o	f8b796c3a13ed165
 11	8001	1783519704621533147	CMakeFiles/rockets.dir/src/Engine/Tests/matrix2.cpp.o	370ddd34332828e7
 10	8118	1783519704617259583	CMakeFiles/rockets.dir/src/Engine/Tests/matrix.cpp.o	e05e4fda1dc6d7c4
 8003	16045	1783519712610489915	CMakeFiles/rockets.dir/src/Engine/Tests/matrix3.cpp.o	2e7fca32cd0457f7
@@ -21,8 +21,12 @@
 56	4265	1783280542049805227	CMakeFiles/rockets.dir/src/Engine/core/Config/ConfigParser.cpp.o	47e100ae1472e434
 336	3099	1783519635478150490	CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o	afdb9ed7183fcc37
 340	4246	1783519635481483781	CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o	21aca5e32cf062e5
-15	2832	1783522345256056146	CMakeFiles/rockets.dir/src/App/Application.cpp.o	5230923cef4d77f4
-2	32	1783526726083456420	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
-47	4338	1783526726133546654	CMakeFiles/rockets.dir/src/main.cpp.o	2e78a1c1a00894cf
-46	4530	1783526726130122369	CMakeFiles/rockets.dir/src/App/Application.cpp.o	5230923cef4d77f4
-4530	5065	1783526730613386770	rockets	71e7c9b21abf64e5
+10	3857	1783874429588158465	CMakeFiles/rockets.dir/src/App/Application.cpp.o	5230923cef4d77f4
+85	8342	1783861406197845297	CMakeFiles/rockets.dir/src/Engine/Platform/Platform.cpp.o	14090201414ed61a
+10	143	1783874358448415839	CMakeFiles/rockets.dir/src/Engine/Event/Event.cpp.o	1e5db9f191e2ce99
+321	1369	1783874358756267682	CMakeFiles/rockets.dir/src/Engine/Input/Keyboard.cpp.o	48f7b164ad34ba52
+1369	2957	1783874359806245893	CMakeFiles/rockets.dir/src/Engine/Input/Mouse.cpp.o	d4decd09f394832b
+143	321	1783874358579604682	CMakeFiles/rockets.dir/src/Engine/Event/EventDispatcher.cpp.o	b0ffd5a6beed3844
+2	8	1783874607594742222	/home/awais/Github/Rockets/build/debug/CMakeFiles/cmake.verify_globs	69652aeddd6b3fbf
+10	4345	1783874607601408766	CMakeFiles/rockets.dir/src/App/Application.cpp.o	5230923cef4d77f4
+4347	4830	1783874611937995364	rockets	2fd51616dcfaed3d

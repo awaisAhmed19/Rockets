@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "Core.h"
@@ -6,32 +5,32 @@
 
 namespace Engine {
 
-using clock_t = std::chrono::steady_clock;
-using time_point_t = clock_t::time_point;
+using Clock = std::chrono::steady_clock;
+using TimePoint = Clock::time_point;
 
-struct timer {
-  time_point_t start;
+struct Timer {
+  Timer() = default;
+
+  void reset() { start = Clock::now(); }
+
+  [[nodiscard]] f64 seconds() const {
+    return std::chrono::duration<f64>(Clock::now() - start).count();
+  }
+
+  [[nodiscard]] f64 milliseconds() const {
+    return std::chrono::duration<f64, std::milli>(Clock::now() - start).count();
+  }
+
+  [[nodiscard]] f64 microseconds() const {
+    return std::chrono::duration<f64, std::micro>(Clock::now() - start).count();
+  }
+
+  [[nodiscard]] f64 nanoseconds() const {
+    return std::chrono::duration<f64, std::nano>(Clock::now() - start).count();
+  }
+
+private:
+  TimePoint start = Clock::now();
 };
 
-/* Initializes or resets the timer */
-inline void timer_reset(timer *t) { t->start = clock_t::now(); }
-/* Returns elapsed time in seconds */
-inline f64 timer_seconds(const timer *t) {
-  return std::chrono::duration<f64>(clock_t::now() - t->start).count();
-}
-/* Returns elapsed time in milliseconds */
-inline f64 timer_milliseconds(const timer *t) {
-  return std::chrono::duration<f64, std::milli>(clock_t::now() - t->start)
-      .count();
-}
-/* Returns elapsed time in microseconds */
-inline f64 timer_microseconds(const timer *t) {
-  return std::chrono::duration<f64, std::micro>(clock_t::now() - t->start)
-      .count();
-}
-/* Returns elapsed time in nanoseconds */
-inline f64 timer_nanoseconds(const timer *t) {
-  return std::chrono::duration<f64, std::nano>(clock_t::now() - t->start)
-      .count();
-}
 } // namespace Engine

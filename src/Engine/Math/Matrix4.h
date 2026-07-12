@@ -184,7 +184,6 @@ struct Matrix4 {
                        data[3][3] * a.w);
   }
 
-  // Convenience: transform a point (w=1) and a direction (w=0).
   inline Vector3 transformPoint(const Vector3 &p) const {
     Vector4 r = (*this) * Vector4(p.x, p.y, p.z, 1.f);
     RT_ASSERT(std::abs(r.w) > eps, "transformPoint produced w == 0");
@@ -310,25 +309,25 @@ struct Matrix4 {
                    0.f, 0.f, 0.f, 1.f);
   }
 
-  static Matrix4 rotationX(f32 radians) {
+  static Matrix4 rotateX(f32 radians) {
     f32 c = std::cos(radians), s = std::sin(radians);
     return Matrix4(1.f, 0.f, 0.f, 0.f, 0.f, c, -s, 0.f, 0.f, s, c, 0.f, 0.f,
                    0.f, 0.f, 1.f);
   }
-  static Matrix4 rotationY(f32 radians) {
+  static Matrix4 rotateY(f32 radians) {
     f32 c = std::cos(radians), s = std::sin(radians);
     return Matrix4(c, 0.f, s, 0.f, 0.f, 1.f, 0.f, 0.f, -s, 0.f, c, 0.f, 0.f,
                    0.f, 0.f, 1.f);
   }
-  static Matrix4 rotationZ(f32 radians) {
+  static Matrix4 rotateZ(f32 radians) {
     f32 c = std::cos(radians), s = std::sin(radians);
     return Matrix4(c, -s, 0.f, 0.f, s, c, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f,
                    0.f, 0.f, 1.f);
   }
 
-  static Matrix4 rotationAxisAngle(const Vector3 &axis, f32 radians) {
+  static Matrix4 rotateAxisAngle(const Vector3 &axis, f32 radians) {
     RT_ASSERT(axis.isNormalized(),
-              "rotationAxisAngle requires a normalized axis");
+              "rotateAxisAngle requires a normalized axis");
     f32 c = std::cos(radians), s = std::sin(radians), t = 1.f - c;
     f32 x = axis.x, y = axis.y, z = axis.z;
     return Matrix4(t * x * x + c, t * x * y - s * z, t * x * z + s * y, 0.f,
@@ -337,9 +336,9 @@ struct Matrix4 {
                    0.f, 0.f, 0.f, 1.f);
   }
 
-  static Matrix4 trs(const Vector3 &translationV, const Matrix4 &rotation,
+  static Matrix4 trs(const Vector3 &translationV, const Matrix4 &rotate,
                      const Vector3 &scaleV) {
-    return translation(translationV) * rotation * scale(scaleV);
+    return translation(translationV) * rotate * scale(scaleV);
   }
 
   static Matrix4 lookAt(const Vector3 &eye, const Vector3 &target,
@@ -388,8 +387,6 @@ struct Matrix4 {
     return result;
   }
 
-  // Normal matrix for transforming normals correctly under non-uniform scale:
-  // inverse-transpose of the upper-left 3x3.
   [[nodiscard]] Matrix3 normalMatrix() const {
     Matrix3 upper3x3(data[0][0], data[0][1], data[0][2], data[1][0], data[1][1],
                      data[1][2], data[2][0], data[2][1], data[2][2]);

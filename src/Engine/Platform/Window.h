@@ -1,15 +1,15 @@
 #pragma once
+
 #include <SDL3/SDL.h>
-#include <cstdint>
 #include <string>
 
 namespace Engine {
 
-struct Window_description {
-  std::string TITLE = "Rockets";
+struct WindowDescription {
+  std::string title = "Rockets";
   int width = 1280;
   int height = 720;
-  bool resizeable = true;
+  bool resizable = true;
 };
 
 class Window {
@@ -23,26 +23,52 @@ public:
   Window(Window &&other) noexcept;
   Window &operator=(Window &&other) noexcept;
 
-  bool Init(const Window_description &desc);
+  bool create(const WindowDescription &desc);
 
-  void shutdown();
-  void onResized(int n_width, int n_height);
-  SDL_Window *Handle() const { return m_window; }
+  void destroy();
 
-  int getWidth() const { return m_width; }
-  int setHeight() const { return m_height; }
-  void setWidth(const int width) { m_width = width; }
-  void setHeight(const int height) { m_height = height; }
-  SDL_Window *getWindowPointer() { return m_window; }
+  void show();
+  void hide();
 
-  float AspectRatio() const;
+  void resize(int width, int height);
+
+  void setTitle(const std::string &title);
+
+  void minimize();
+  void maximize();
+  void restore();
+
+  bool setFullscreen(bool enabled);
+  void setBorderless(bool enabled);
+
+  void focus();
+
+  bool isFullscreen() const;
+  bool isBorderless() const;
+  bool isMinimized() const;
+  bool isMaximized() const;
+
+  void close();
+
+  void onResized(int width, int height);
+
+  SDL_Window *handle() const { return m_window; }
+
+  int width() const { return m_width; }
+  int height() const { return m_height; }
+
+  float aspectRatio() const;
 
 private:
-  void MoveFrom(Window &win) noexcept;
+  bool init(const WindowDescription &desc);
+  void moveFrom(Window &other) noexcept;
+
   SDL_Window *m_window = nullptr;
+
   int m_width = 0;
   int m_height = 0;
-  bool m_ownVideoSubsystem = false;
+
+  SDL_WindowFlags m_flags = 0;
 };
 
-}; // namespace Engine
+} // namespace Engine

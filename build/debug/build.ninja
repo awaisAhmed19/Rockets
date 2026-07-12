@@ -160,6 +160,56 @@ build CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o: CXX_COMP
   OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Core/Config
   TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
 
+build CMakeFiles/rockets.dir/src/Engine/Event/Event.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Event/Event.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Event/Event.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Event
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Event/EventDispatcher.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Event/EventDispatcher.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Event/EventDispatcher.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Event
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Input/Keyboard.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Input/Keyboard.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Input/Keyboard.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Input
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Input/Mouse.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Input/Mouse.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Input/Mouse.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Input
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
+build CMakeFiles/rockets.dir/src/Engine/Platform/Platform.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Platform/Platform.cpp || cmake_object_order_depends_target_rockets
+  CONFIG = Debug
+  DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
+  DEP_FILE = CMakeFiles/rockets.dir/src/Engine/Platform/Platform.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -g3 -O0
+  INCLUDES = -I/home/awais/Github/Rockets/src -I/home/awais/Github/Rockets/third_party/imgui -I/home/awais/Github/Rockets/third_party/imgui/backends
+  OBJECT_DIR = CMakeFiles/rockets.dir
+  OBJECT_FILE_DIR = CMakeFiles/rockets.dir/src/Engine/Platform
+  TARGET_SUPPORT_DIR = CMakeFiles/rockets.dir
+
 build CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o: CXX_COMPILER__rockets_unscanned_Debug /home/awais/Github/Rockets/src/Engine/Platform/Window.cpp || cmake_object_order_depends_target_rockets
   CONFIG = Debug
   DEFINES = -DLX_ASSET_DIR=\"/home/awais/Github/Rockets/assets\"
@@ -258,7 +308,7 @@ build CMakeFiles/rockets.dir/src/main.cpp.o: CXX_COMPILER__rockets_unscanned_Deb
 #############################################
 # Link the executable rockets
 
-build rockets: CXX_EXECUTABLE_LINKER__rockets_Debug CMakeFiles/rockets.dir/src/App/Application.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix4.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector4.cpp.o CMakeFiles/rockets.dir/src/main.cpp.o | /usr/lib/libSDL3_image.so.0.4.4 /usr/lib/libSDL3_ttf.so.0.2.2 libimgui.a /usr/lib/libSDL3.so.0.4.10 || libimgui.a
+build rockets: CXX_EXECUTABLE_LINKER__rockets_Debug CMakeFiles/rockets.dir/src/App/Application.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigFile.cpp.o CMakeFiles/rockets.dir/src/Engine/Core/Config/ConfigParser.cpp.o CMakeFiles/rockets.dir/src/Engine/Event/Event.cpp.o CMakeFiles/rockets.dir/src/Engine/Event/EventDispatcher.cpp.o CMakeFiles/rockets.dir/src/Engine/Input/Keyboard.cpp.o CMakeFiles/rockets.dir/src/Engine/Input/Mouse.cpp.o CMakeFiles/rockets.dir/src/Engine/Platform/Platform.cpp.o CMakeFiles/rockets.dir/src/Engine/Platform/Window.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/matrix4.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector2.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector3.cpp.o CMakeFiles/rockets.dir/src/Engine/Tests/vector4.cpp.o CMakeFiles/rockets.dir/src/main.cpp.o | /usr/lib/libSDL3_image.so.0.4.4 /usr/lib/libSDL3_ttf.so.0.2.2 libimgui.a /usr/lib/libSDL3.so.0.4.10 || libimgui.a
   CONFIG = Debug
   DEP_FILE = CMakeFiles/rockets.dir/link.d
   FLAGS = -g

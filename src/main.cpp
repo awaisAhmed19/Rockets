@@ -1,6 +1,9 @@
 #include "App/Application.h"
+#include "Engine/Core/Logger.h"
 int main() {
+  Logger::init("runtime.log");
+  App app;
+  app.start();
 
-  App::start();
   return 0;
 }

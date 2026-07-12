@@ -245,6 +245,28 @@ struct Matrix3 {
   }
 
   static Matrix3 zero() { return Matrix3(); }
+  static Matrix3 rotateX(f32 radians) {
+    f32 c = std::cos(radians), s = std::sin(radians);
+    return Matrix3(1.f, 0.f, 0.f, 0.f, c, -s, 0.f, s, c);
+  }
+  static Matrix3 rotateY(f32 radians) {
+    f32 c = std::cos(radians), s = std::sin(radians);
+    return Matrix3(c, 0.f, s, 0.f, 1.f, 0.f, -s, 0.f, c);
+  }
+  static Matrix3 rotateZ(f32 radians) {
+    f32 c = std::cos(radians), s = std::sin(radians);
+    return Matrix3(c, -s, 0.f, s, c, 0.f, 0.f, 0.f, 1.f);
+  }
+
+  static Matrix3 rotateAxisAngle(const Vector3 &axis, f32 radians) {
+    RT_ASSERT(axis.isNormalized(),
+              "rotateAxisAngle requires a normalized axis");
+    f32 c = std::cos(radians), s = std::sin(radians), t = 1.f - c;
+    f32 x = axis.x, y = axis.y, z = axis.z;
+    return Matrix3(t * x * x + c, t * x * y - s * z, t * x * z + s * y,
+                   t * x * y + s * z, t * y * y + c, t * y * z - s * x,
+                   t * x * z - s * y, t * y * z + s * x, t * z * z + c);
+  }
 };
 }; // namespace math
 }; // namespace Engine
