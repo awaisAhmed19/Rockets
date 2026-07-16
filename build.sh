@@ -137,7 +137,7 @@ do_run() {
 
 	(
 		cd "$build_subdir" || exit 1
-		exec "./${BINARY_NAME}"
+		exec "./${BINARY_NAME}" "$@"
 	)
 }
 
@@ -191,7 +191,7 @@ main() {
 	run)
 		require_cmake
 		require_vcpkg
-		do_run
+		do_run "$@"
 		;;
 	install)
 		require_cmake
