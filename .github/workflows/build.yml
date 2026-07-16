@@ -1,0 +1,77 @@
+name: Rockets CI
+
+on:
+  push:
+    branches: [main, dev]
+
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Linux (${{ matrix.config }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [debug, release]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Build Tools
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            git \
+            pkg-config
+
+      - name: Cache Third-Party Dependencies
+        uses: actions/cache@v4
+        with:
+          path: third_party
+          key: third-party-${{ runner.os }}-${{ hashFiles('bootstrap.sh') }}
+
+      - name: Bootstrap Dependencies
+        run: |
+          chmod +x bootstrap.sh
+          ./bootstrap.sh
+
+      - name: Build (${{ matrix.config }})
+        run: |
+          chmod +x build.sh
+          ./build.sh ${{ matrix.config }}
+
+  format:
+    name: Code Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: |
+          sudo apt update
+          sudo apt install -y clang-format
+
+      - name: Check Formatting
+        run: |
+          find . \
+            \( -path "./third_party" -prune \) -o \
+            \( \
+              -name "*.cpp" -o \
+              -name "*.hpp" -o \
+              -name "*.c"   -o \
+              -name "*.h" \
+            \) \
+            -print | xargs clang-format --dry-run --Werror

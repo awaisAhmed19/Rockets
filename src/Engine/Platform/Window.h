@@ -60,7 +60,6 @@ public:
   float aspectRatio() const;
 
 private:
-  bool init(const WindowDescription &desc);
   void moveFrom(Window &other) noexcept;
 
   SDL_Window *m_window = nullptr;

@@ -26,14 +26,7 @@ void Window::moveFrom(Window &other) noexcept {
 }
 void Window::minimize() { SDL_MinimizeWindow(m_window); }
 void Window::maximize() { SDL_MaximizeWindow(m_window); }
-bool Window::init(const WindowDescription &desc) {
-  if (m_window)
-    return false;
 
-  m_flags = 0;
-
-  return true;
-}
 void Window::close() {
   if (m_window) {
     SDL_DestroyWindow(m_window);
@@ -81,8 +74,6 @@ bool Window::isMaximized() const {
   return (SDL_GetWindowFlags(m_window) & SDL_WINDOW_MAXIMIZED) != 0;
 }
 bool Window::create(const WindowDescription &desc) {
-  if (!init(desc))
-    return false;
 
   m_window =
       SDL_CreateWindow(desc.title.c_str(), desc.width, desc.height, m_flags);

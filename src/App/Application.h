@@ -8,7 +8,7 @@
 #include "Engine/Input/Mouse.h"
 #include "Engine/Platform/Platform.h"
 #include "Engine/Platform/Window.h"
-#include <GL/glew.h>
+// #include <GL/glew.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_oldnames.h>
