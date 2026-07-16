@@ -1,29 +1,76 @@
-# Compiled class file
-*.class
+# Build output
+build/
+out/
+bin/
+lib/
 
-# Log file
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+compile_commands.json
+
+# Ninja
+.ninja_deps
+.ninja_log
+
+# vcpkg
+.tools/
+vcpkg_installed/
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Editors
+*~
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
 
-# BlueJ files
-*.ctxt
+# Runtime crash dumps
+*.stackdump
+core
+core.*
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Temporary files
+tmp/
+temp/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
+# Project-specific
+Tickets/
+resources/
+
+# Archives
 *.zip
+*.tar
 *.tar.gz
+*.7z
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Object files
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.lib
+*.exp
+*.pdb
 
-*.json
-resources/
-Tickets/
-build/
+# Executables
+*.exe
+*.out
+
+# Generated caches
+.cache/

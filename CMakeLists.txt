@@ -31,9 +31,9 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
-find_package(SDL3 REQUIRED)
-find_package(SDL3_image REQUIRED)
-find_package(SDL3_ttf REQUIRED)
+find_package(SDL3 REQUIRED CONFIG)
+find_package(SDL3_image REQUIRED CONFIG)
+find_package(SDL3_ttf REQUIRED CONFIG)
 
 
 set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/third_party/imgui")

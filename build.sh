@@ -33,11 +33,13 @@ die() {
 	exit 1
 }
 
-# ── Configuration ─────────────────────────────────────────────────────────────
 BUILD_DIR="build"
 INSTALL_PREFIX="${INSTALL_PREFIX:-/usr/local}"
-BINARY_NAME="rockets" # must match CMakeLists target name
+BINARY_NAME="rockets"
 
+TOOLS_DIR=".tools"
+VCPKG_ROOT="${TOOLS_DIR}/vcpkg"
+VCPKG_TOOLCHAIN="${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
 # Detect CPU core count portably
 CORES=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
 
@@ -51,19 +53,38 @@ require_project_root() {
 	[[ -f CMakeLists.txt ]] ||
 		die "CMakeLists.txt not found. Run this script from the project root."
 }
+require_vcpkg() {
 
+	[[ -f "$VCPKG_TOOLCHAIN" ]] || die \
+		"vcpkg not found.
+
+Run:
+
+    ./bootstrap.sh
+
+before building."
+
+}
 # ── Build ─────────────────────────────────────────────────────────────────────
 do_build() {
 	local build_type="$1"
 	local build_subdir="${BUILD_DIR}/${build_type,,}"
 
 	log_section "Configuring: ${build_type}"
-	cmake -B "$build_subdir" -G Ninja \
+	cmake \
+		-B "$build_subdir" \
+		-G Ninja \
 		-DCMAKE_BUILD_TYPE="$build_type" \
 		-DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
 		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-		-DCMAKE_COLOR_DIAGNOSTICS=ON
-
+		-DCMAKE_COLOR_DIAGNOSTICS=ON \
+		-DCMAKE_TOOLCHAIN_FILE="$VCPKG_TOOLCHAIN" \
+		-DVCPKG_TARGET_TRIPLET=x64-linux \
+		-DSDL_X11=ON \
+		-DSDL_WAYLAND=ON \
+		-DSDL_IBUS=ON \
+		-DSDL_DBUS=ON \
+		-DSDL_X11_XSCRNSAVER=OFF
 	# Keep compile_commands.json in project root for tooling (clangd, etc.)
 	if [[ -f "${build_subdir}/compile_commands.json" ]]; then
 		ln -sf "${build_subdir}/compile_commands.json" compile_commands.json
@@ -151,14 +172,17 @@ main() {
 	case "${cmd,,}" in
 	debug)
 		require_cmake
+		require_vcpkg
 		do_build "Debug"
 		;;
 	release)
 		require_cmake
+		require_vcpkg
 		do_build "Release"
 		;;
 	relwithdebinfo | reldbg)
 		require_cmake
+		require_vcpkg
 		do_build "RelWithDebInfo"
 		;;
 	clean)
@@ -166,10 +190,12 @@ main() {
 		;;
 	run)
 		require_cmake
+		require_vcpkg
 		do_run
 		;;
 	install)
 		require_cmake
+		require_vcpkg
 		do_install
 		;;
 	uninstall)
@@ -189,6 +215,8 @@ main() {
 		echo ""
 		echo "Environment:"
 		echo "  INSTALL_PREFIX     Install prefix (default: /usr/local)"
+		echo "Dependencies:"
+		echo "Run ./bootstrap.sh once before building."
 		;;
 	*)
 		die "Unknown command: ${cmd}. Run '$0 help' for usage."
