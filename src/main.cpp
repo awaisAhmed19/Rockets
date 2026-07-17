@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]) {
   Cmd::parse(argc, argv);
   Logger::init("runtime.log");
-  App app;
-  app.start();
+  // App app;
+  // app.start();
   return 0;
 }

@@ -1,12 +1,22 @@
 #pragma once
-#include "Logger.h"
+
+#include <optional>
+#include <string>
+
 namespace Cmd {
-void parse(int argc, char *argv[]) {
-  int i = 0;
-  while (i < argc) {
-    std::string_view msg{argv[i]};
-    Logger::log(LogLevel::INFO, msg);
-    i++;
-  }
-}
-}; // namespace Cmd
+
+struct ParsedCLI {
+  bool help = false;
+  bool fullscreen = false;
+  bool vsync = false;
+
+  std::optional<int> width;
+  std::optional<int> height;
+  std::optional<std::string> scene;
+};
+
+ParsedCLI parse(int argc, char *argv[]);
+
+void help();
+
+} // namespace Cmd

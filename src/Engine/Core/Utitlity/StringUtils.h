@@ -6,7 +6,32 @@
 #include <vector>
 namespace Engine {
 namespace String {
+inline bool starts_with(const std::string &str, const std::string &prefix) {
+  return str.compare(0, prefix.size(), prefix) == 0;
+}
 
+inline bool ends_with(const std::string &str, const std::string &suffix) {
+  if (suffix.size() > str.size())
+    return false;
+
+  return str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
+inline bool contains(const std::string &str, const std::string &substr) {
+  return str.find(substr) != std::string::npos;
+}
+
+inline std::string to_upper(std::string str) {
+  for (char &c : str)
+    c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
+  return str;
+}
+inline std::string to_lower(std::string str) {
+  for (char &c : str) {
+    c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+  }
+  return str;
+}
 inline std::string trim(const std::string &str,
                         const std::unordered_set<char> &chars = {' ', '\t',
                                                                  '\n', '\r'}) {
@@ -21,7 +46,18 @@ inline std::string trim(const std::string &str,
 
   return str.substr(begin, end - begin);
 }
+inline std::string trim(const std::string &str, const std::string &chars) {
+  size_t begin = 0;
+  size_t end = str.size();
 
+  while (begin < end && starts_with(str, chars))
+    ++begin;
+
+  while (end > begin && ends_with(str, chars))
+    --end;
+
+  return str.substr(begin, end - begin);
+}
 inline std::vector<std::string>
 split_string_with_delimiter(const std::string &str,
                             const std::string &delimiter) {
@@ -59,32 +95,6 @@ inline std::string extract_string_between_enclosure(const std::string &str,
   return str.substr(begin, end - begin);
 }
 
-inline bool starts_with(const std::string &str, const std::string &prefix) {
-  return str.compare(0, prefix.size(), prefix) == 0;
-}
-
-inline bool ends_with(const std::string &str, const std::string &suffix) {
-  if (suffix.size() > str.size())
-    return false;
-
-  return str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
-}
-
-inline bool contains(const std::string &str, const std::string &substr) {
-  return str.find(substr) != std::string::npos;
-}
-
-inline std::string to_upper(std::string str) {
-  for (char &c : str)
-    c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
-  return str;
-}
-inline std::string to_lower(std::string str) {
-  for (char &c : str) {
-    c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
-  }
-  return str;
-}
 inline std::string ltrim(const std::string &str,
                          const std::unordered_set<char> &chars = {' ', '\t',
                                                                   '\n', '\r'}) {
@@ -173,6 +183,45 @@ inline bool is_number(const std::string &str) {
   }
 
   return digit;
+}
+
+inline bool string_in_list(const std::string &str,
+                           std::vector<std::string> list) {
+  if (list.empty())
+    return false;
+
+  std::sort(list.begin(), list.end());
+
+  size_t low = 0;
+  size_t high = list.size() - 1;
+
+  while (low <= high) {
+    size_t mid = low + (high - low) / 2;
+
+    if (list[mid] == str)
+      return true;
+
+    if (list[mid] < str) {
+      low = mid + 1;
+    } else {
+      if (mid == 0)
+        break;
+
+      high = mid - 1;
+    }
+  }
+
+  return false;
+}
+
+inline std::vector<std::string> make_string_vector(int argc, char *args[]) {
+  std::vector<std::string> ret;
+  int size = argc;
+  for (int i = 0; i < size; i++) {
+    ret.push_back(args[i]);
+  }
+
+  return ret;
 }
 } // namespace String
 }; // namespace Engine

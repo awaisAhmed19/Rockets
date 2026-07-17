@@ -126,6 +126,7 @@ do_clean() {
 }
 
 do_run() {
+	shift
 	do_build "Debug"
 
 	local build_subdir="${BUILD_DIR}/debug"
